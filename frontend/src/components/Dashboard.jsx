@@ -191,7 +191,7 @@ const Dashboard = () => {
                       >
                         View Project
                       </Link>
-                      {(user.id === project.owner || user.role === 'admin') && (
+                      {(user?.id === project.owner || user?.role === 'admin') && (
                         <button
                           onClick={() => handleDeleteProject(project._id)}
                           className="text-red-600 hover:text-red-900"
