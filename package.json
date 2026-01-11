@@ -1,0 +1,13 @@
+{
+  "name": "projectmanager",
+  "version": "1.0.0",
+  "description": "Project Manager App",
+  "scripts": {
+    "start-backend": "cd backend && npm run dev",
+    "start-frontend": "cd frontend && npm run dev",
+    "start": "npm run start-backend & npm run start-frontend"
+  },
+  "dependencies": {
+    "mongodb": "^7.0.0"
+  }
+}
