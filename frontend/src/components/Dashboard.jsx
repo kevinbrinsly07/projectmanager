@@ -138,6 +138,7 @@ const Dashboard = () => {
             {user && user.role === 'admin' && (
               <Link to="/admin" className="text-indigo-600 hover:text-indigo-900">Admin</Link>
             )}
+            <Link to="/timeline" className="text-indigo-600 hover:text-indigo-900">Timeline</Link>
             <button onClick={logout} className="text-indigo-600 hover:text-indigo-900">Logout</button>
           </div>
         </div>
@@ -177,7 +178,7 @@ const Dashboard = () => {
             ) : null}
           </div>
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your Projects</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project) => (
                 <div key={project._id} className="bg-white overflow-hidden shadow rounded-lg">
@@ -191,7 +192,7 @@ const Dashboard = () => {
                       >
                         View Project
                       </Link>
-                      {(user?.id === project.owner || user?.role === 'admin') && (
+                      {(user?.id === project.owner || user?.role === 'admin' || user?.role === 'manager') && (
                         <button
                           onClick={() => handleDeleteProject(project._id)}
                           className="text-red-600 hover:text-red-900"
@@ -205,6 +206,7 @@ const Dashboard = () => {
               ))}
             </div>
           </div>
+          {user && (user.role === 'admin' || user.role === 'manager') && (
           <div className="bg-white shadow rounded-lg p-6">
             <h3 className="text-lg font-medium text-gray-900 mb-4">Create New Project</h3>
             <form onSubmit={handleCreateProject}>
@@ -256,6 +258,7 @@ const Dashboard = () => {
               </button>
             </form>
           </div>
+          )}
         </div>
       </main>
     </div>

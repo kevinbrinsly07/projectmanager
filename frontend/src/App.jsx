@@ -5,6 +5,7 @@ import ProjectDetail from './components/ProjectDetail';
 import Login from './components/Login';
 import Register from './components/Register';
 import Admin from './components/Admin';
+import Timeline from './components/Timeline';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/timeline" element={<Timeline />} />
         </Routes>
       </Router>
     </AuthProvider>

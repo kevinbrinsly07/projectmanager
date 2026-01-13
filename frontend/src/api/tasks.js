@@ -7,6 +7,11 @@ export const getTasks = async (projectId) => {
   return response.data;
 };
 
+export const getUserTasks = async () => {
+  const response = await axios.get(`${API_BASE_URL}/tasks/user`);
+  return response.data;
+};
+
 export const createTask = async (task) => {
   const response = await axios.post(`${API_BASE_URL}/tasks`, task);
   return response.data;

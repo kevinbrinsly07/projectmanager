@@ -9,11 +9,15 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description || '');
-  const [assignee, setAssignee] = useState(task.assignee?._id || '');
+  const [assignee, setAssignee] = useState(
+    task.assignee 
+      ? (typeof task.assignee === 'string' ? task.assignee : task.assignee._id) 
+      : ''
+  );
   const [dueDate, setDueDate] = useState(task.dueDate ? task.dueDate.split('T')[0] : '');
   const [priority, setPriority] = useState(task.priority);
   const [status, setStatus] = useState(task.status);
-  const [list, setList] = useState(task.list._id);
+  const [list, setList] = useState(typeof task.list === 'string' ? task.list : task.list._id);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [attachments, setAttachments] = useState([]);
@@ -21,6 +25,8 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
   const [isTracking, setIsTracking] = useState(false);
   const [currentLogId, setCurrentLogId] = useState(null);
   const [newSubtaskName, setNewSubtaskName] = useState('');
+
+  console.log('TaskModal - task.assignee:', task.assignee, 'assignee state:', assignee);
 
   useEffect(() => {
     fetchComments();
@@ -66,6 +72,8 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
         status,
         list,
       };
+      console.log('Saving task with data:', updatedTask);
+      console.log('Assignee value:', assignee, 'Type:', typeof assignee);
       await updateTask(task._id, updatedTask);
       onUpdate();
       setIsEditing(false);
