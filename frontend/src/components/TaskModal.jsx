@@ -173,203 +173,394 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onClick={onClose}>
-      <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white" onClick={e => e.stopPropagation()}>
-        <div className="mt-3">
-          <div className="flex justify-between items-center mb-4">
-            {isEditing ? (
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="text-2xl font-bold text-gray-900 border rounded px-2 py-1"
-              />
-            ) : (
-              <h3 className="text-2xl font-bold text-gray-900">{task.name}</h3>
-            )}
-            <button onClick={onClose} className="text-gray-400 hover:text-gray-600">×</button>
-          </div>
-
-          {isEditing ? (
-            <div className="mb-4">
-              <div className="mb-4">
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-                <textarea
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  rows={3}
-                  placeholder="Description"
+    <div className="fixed inset-0 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full z-50" onClick={onClose}>
+      <div className="relative top-8 mx-auto p-6 w-11/12 max-w-4xl" onClick={e => e.stopPropagation()}>
+        <div className="bg-white rounded-xl shadow-xl border border-slate-200">
+          {/* Header */}
+          <div className="flex justify-between items-center p-6 border-b border-slate-200">
+            <div className="flex-1">
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="text-2xl font-bold text-slate-900 border-0 border-b-2 border-indigo-500 focus:ring-0 focus:border-indigo-600 px-0 py-1 w-full bg-transparent"
+                  placeholder="Task name"
                 />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="assignee" className="block text-sm font-medium text-gray-700">Assignee</label>
-                  <select
-                    id="assignee"
-                    value={assignee}
-                    onChange={(e) => setAssignee(e.target.value)}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  >
-                    <option value="">Unassigned</option>
-                    {users.map(user => (
-                      <option key={user._id} value={user._id}>{user.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="dueDate" className="block text-sm font-medium text-gray-700">Due Date</label>
-                  <input
-                    id="dueDate"
-                    type="date"
-                    value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="priority" className="block text-sm font-medium text-gray-700">Priority</label>
-                  <select
-                    id="priority"
-                    value={priority}
-                    onChange={(e) => setPriority(e.target.value)}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  >
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status</label>
-                  <select
-                    id="status"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  >
-                    <option value="todo">To Do</option>
-                    <option value="inprogress">In Progress</option>
-                    <option value="done">Done</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="list" className="block text-sm font-medium text-gray-700">List</label>
-                  <select
-                    id="list"
-                    value={list}
-                    onChange={(e) => setList(e.target.value)}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  >
-                    {lists.map(l => (
-                      <option key={l._id} value={l._id}>{l.name}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <div className="mt-4 flex space-x-2">
-                <button onClick={handleSave} className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Save</button>
-                <button onClick={() => setIsEditing(false)} className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">Cancel</button>
-              </div>
-            </div>
-          ) : (
-            <div className="mb-4">
-              <p className="text-gray-600">{task.description || 'No description'}</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                <span className={`px-2 py-1 rounded text-xs ${priority === 'high' ? 'bg-red-100 text-red-800' : priority === 'medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}`}>
-                  {priority}
-                </span>
-                <span className={`px-2 py-1 rounded text-xs ${status === 'done' ? 'bg-green-100 text-green-800' : status === 'inprogress' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}`}>
-                  {status}
-                </span>
-                {task.assignee && <span className="px-2 py-1 rounded text-xs bg-purple-100 text-purple-800">Assigned to {task.assignee.name}</span>}
-                {dueDate && <span className="px-2 py-1 rounded text-xs bg-orange-100 text-orange-800">Due {new Date(dueDate).toLocaleDateString()}</span>}
-              </div>
-            </div>
-          )}
-
-          <div className="mb-4">
-            <div className="flex justify-between items-center mb-2">
-              <h4 className="text-lg font-semibold">Time Tracking</h4>
-              {isTracking ? (
-                <button onClick={handleStopTracking} className="bg-red-600 text-white px-4 py-2 rounded">Stop Tracking</button>
               ) : (
-                <button onClick={handleStartTracking} className="bg-green-600 text-white px-4 py-2 rounded">Start Tracking</button>
+                <h3 className="text-2xl font-bold text-slate-900">{task.name}</h3>
               )}
             </div>
-            <div className="space-y-2">
-              {timeLogs.map(log => (
-                <div key={log._id} className="bg-gray-50 p-2 rounded">
-                  <p className="text-sm">{log.user.name}: {log.duration || 'Ongoing'} minutes</p>
-                  <p className="text-xs text-gray-500">{new Date(log.startTime).toLocaleString()} - {log.endTime ? new Date(log.endTime).toLocaleString() : 'Ongoing'}</p>
-                </div>
-              ))}
-            </div>
+            <button 
+              onClick={onClose} 
+              className="text-slate-400 hover:text-slate-600 p-2 hover:bg-slate-100 rounded-lg transition-colors duration-200"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
 
-          <div className="mb-4">
-            <h4 className="text-lg font-semibold mb-2">Subtasks</h4>
-            <form onSubmit={handleCreateSubtask} className="mb-2">
-              <input
-                type="text"
-                value={newSubtaskName}
-                onChange={(e) => setNewSubtaskName(e.target.value)}
-                className="w-full border rounded px-2 py-1"
-                placeholder="New subtask name"
-              />
-              <button type="submit" className="mt-1 bg-indigo-600 text-white px-4 py-2 rounded">Add Subtask</button>
-            </form>
-            <div className="space-y-2">
-              {task.subtasks && task.subtasks.map(subtask => (
-                <div key={subtask._id} className="bg-gray-50 p-2 rounded">
-                  <p className="text-sm">{subtask.name}</p>
-                  <p className="text-xs text-gray-500">{subtask.status}</p>
+          <div className="p-6 max-h-[70vh] overflow-y-auto">
+            {/* Edit Mode */}
+            {isEditing ? (
+              <div className="space-y-6">
+                <div>
+                  <label htmlFor="description" className="block text-sm font-medium text-slate-700 mb-2">
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 resize-none"
+                    rows={3}
+                    placeholder="Describe this task..."
+                  />
                 </div>
-              ))}
-            </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="assignee" className="block text-sm font-medium text-slate-700 mb-2">
+                      Assignee
+                    </label>
+                    <select
+                      id="assignee"
+                      value={assignee}
+                      onChange={(e) => setAssignee(e.target.value)}
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                    >
+                      <option value="">Unassigned</option>
+                      {users.map(user => (
+                        <option key={user._id} value={user._id}>{user.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="dueDate" className="block text-sm font-medium text-slate-700 mb-2">
+                      Due Date
+                    </label>
+                    <input
+                      id="dueDate"
+                      type="date"
+                      value={dueDate}
+                      onChange={(e) => setDueDate(e.target.value)}
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="priority" className="block text-sm font-medium text-slate-700 mb-2">
+                      Priority
+                    </label>
+                    <select
+                      id="priority"
+                      value={priority}
+                      onChange={(e) => setPriority(e.target.value)}
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                    >
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="status" className="block text-sm font-medium text-slate-700 mb-2">
+                      Status
+                    </label>
+                    <select
+                      id="status"
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                    >
+                      <option value="todo">To Do</option>
+                      <option value="inprogress">In Progress</option>
+                      <option value="await_release">Await Release</option>
+                      <option value="in_review">In Review</option>
+                      <option value="reopened">Reopened</option>
+                      <option value="done">Done</option>
+                    </select>
+                  </div>
+                  
+                  <div className="md:col-span-2">
+                    <label htmlFor="list" className="block text-sm font-medium text-slate-700 mb-2">
+                      List
+                    </label>
+                    <select
+                      id="list"
+                      value={list}
+                      onChange={(e) => setList(e.target.value)}
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                    >
+                      {lists.map(l => (
+                        <option key={l._id} value={l.name}>{l.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="flex justify-end space-x-4 pt-4 border-t border-slate-200">
+                  <button 
+                    onClick={() => setIsEditing(false)} 
+                    className="px-4 py-2 text-slate-600 hover:text-slate-900 transition-colors duration-200 font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    onClick={handleSave} 
+                    className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* View Mode */
+              <div className="space-y-6">
+                {/* Task Overview */}
+                <div>
+                  <h4 className="text-sm font-medium text-slate-700 mb-2">Description</h4>
+                  <p className="text-slate-600 bg-slate-50 rounded-lg p-4">{task.description || 'No description provided'}</p>
+                  
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      priority === 'high' ? 'bg-red-100 text-red-800' :
+                      priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-green-100 text-green-800'
+                    }`}>
+                      {priority.charAt(0).toUpperCase() + priority.slice(1)} Priority
+                    </span>
+                    
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      status === 'done' ? 'bg-green-100 text-green-800' :
+                      status === 'inprogress' ? 'bg-blue-100 text-blue-800' :
+                      status === 'await_release' ? 'bg-indigo-100 text-indigo-800' :
+                      status === 'in_review' ? 'bg-purple-100 text-purple-800' :
+                      status === 'reopened' ? 'bg-red-100 text-red-800' :
+                      'bg-slate-100 text-slate-800'
+                    }`}>
+                      {status === 'todo' ? 'To Do' :
+                       status === 'inprogress' ? 'In Progress' :
+                       status === 'await_release' ? 'Await Release' :
+                       status === 'in_review' ? 'In Review' :
+                       status === 'reopened' ? 'Reopened' :
+                       status === 'done' ? 'Done' : status}
+                    </span>
+                    
+                    {task.assignee && (
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                        Assigned to {task.assignee.name}
+                      </span>
+                    )}
+                    
+                    {dueDate && (
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                        Due {new Date(dueDate).toLocaleDateString()}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Time Tracking */}
+                <div className="border-t border-slate-200 pt-6">
+                  <div className="flex justify-between items-center mb-4">
+                    <h4 className="text-lg font-semibold text-slate-900">Time Tracking</h4>
+                    {isTracking ? (
+                      <button 
+                        onClick={handleStopTracking} 
+                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+                      >
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
+                        </svg>
+                        Stop Tracking
+                      </button>
+                    ) : (
+                      <button 
+                        onClick={handleStartTracking} 
+                        className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+                      >
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.586a1 1 0 01.707.293l.707.707A1 1 0 0012.414 11H15m-3 7.5A9.5 9.5 0 1121.5 12 9.5 9.5 0 0112 2.5z" />
+                        </svg>
+                        Start Tracking
+                      </button>
+                    )}
+                  </div>
+                  
+                  {timeLogs.length > 0 && (
+                    <div className="space-y-3">
+                      {timeLogs.map(log => (
+                        <div key={log._id} className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-slate-900">{log.user.name}</span>
+                            <span className="text-sm text-slate-600">{log.duration || 'Ongoing'} minutes</span>
+                          </div>
+                          <p className="text-xs text-slate-500 mt-1">
+                            {new Date(log.startTime).toLocaleString()} - {log.endTime ? new Date(log.endTime).toLocaleString() : 'Ongoing'}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Subtasks */}
+                <div className="border-t border-slate-200 pt-6">
+                  <h4 className="text-lg font-semibold text-slate-900 mb-4">Subtasks</h4>
+                  <form onSubmit={handleCreateSubtask} className="mb-4">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={newSubtaskName}
+                        onChange={(e) => setNewSubtaskName(e.target.value)}
+                        className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                        placeholder="Add a new subtask..."
+                      />
+                      <button 
+                        type="submit" 
+                        className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+                      >
+                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Add
+                      </button>
+                    </div>
+                  </form>
+                  
+                  {task.subtasks && task.subtasks.length > 0 && (
+                    <div className="space-y-2">
+                      {task.subtasks.map(subtask => (
+                        <div key={subtask._id} className="bg-slate-50 rounded-lg p-3 border border-slate-200">
+                          <p className="text-sm text-slate-900">{subtask.name}</p>
+                          <p className="text-xs text-slate-500 mt-1">{subtask.status}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Attachments */}
+                <div className="border-t border-slate-200 pt-6">
+                  <h4 className="text-lg font-semibold text-slate-900 mb-4">Attachments</h4>
+                  <div className="mb-4">
+                    <input 
+                      type="file" 
+                      onChange={handleFileUpload} 
+                      className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-colors duration-200"
+                    />
+                  </div>
+                  
+                  {attachments.length > 0 && (
+                    <div className="space-y-2">
+                      {attachments.map(attachment => (
+                        <div key={attachment._id} className="flex justify-between items-center bg-slate-50 rounded-lg p-3 border border-slate-200">
+                          <a 
+                            href={`http://localhost:5000/uploads/${attachment.filename}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="text-indigo-600 hover:text-indigo-700 font-medium flex items-center"
+                          >
+                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                            </svg>
+                            {attachment.originalName}
+                          </a>
+                          <button 
+                            onClick={() => handleDeleteAttachment(attachment._id)} 
+                            className="text-red-600 hover:text-red-700 p-1 rounded hover:bg-red-50 transition-colors duration-200"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Comments */}
+                <div className="border-t border-slate-200 pt-6">
+                  <h4 className="text-lg font-semibold text-slate-900 mb-4">Comments</h4>
+                  <form onSubmit={handleAddComment} className="mb-4">
+                    <textarea
+                      value={newComment}
+                      onChange={(e) => setNewComment(e.target.value)}
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 resize-none"
+                      rows={3}
+                      placeholder="Add a comment..."
+                    />
+                    <div className="flex justify-end mt-2">
+                      <button 
+                        type="submit" 
+                        className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+                      >
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                        Add Comment
+                      </button>
+                    </div>
+                  </form>
+                  
+                  {comments.length > 0 && (
+                    <div className="space-y-4">
+                      {comments.map(comment => (
+                        <div key={comment._id} className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                          <p className="text-sm text-slate-900 mb-2">{comment.text}</p>
+                          <div className="flex justify-between items-center">
+                            <p className="text-xs text-slate-500">
+                              By {comment.author.name} on {new Date(comment.createdAt).toLocaleString()}
+                            </p>
+                            <button 
+                              onClick={() => handleDeleteComment(comment._id)} 
+                              className="text-red-600 hover:text-red-700 text-xs font-medium hover:bg-red-50 px-2 py-1 rounded transition-colors duration-200"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="mb-4">
-            <h4 className="text-lg font-semibold mb-2">Attachments</h4>
-            <input type="file" onChange={handleFileUpload} className="mb-2" />
-            <div className="space-y-2">
-              {attachments.map(attachment => (
-                <div key={attachment._id} className="flex justify-between items-center bg-gray-50 p-2 rounded">
-                  <a href={`http://localhost:5000/uploads/${attachment.filename}`} target="_blank" rel="noopener noreferrer" className="text-indigo-600">{attachment.originalName}</a>
-                  <button onClick={() => handleDeleteAttachment(attachment._id)} className="text-red-600">Delete</button>
-                </div>
-              ))}
+          {/* Footer Actions */}
+          {!isEditing && (
+            <div className="flex justify-between items-center p-6 border-t border-slate-200 bg-slate-50 rounded-b-xl">
+              <button 
+                onClick={() => setIsEditing(true)} 
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                Edit Task
+              </button>
+              
+              <button 
+                onClick={handleDelete} 
+                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Delete Task
+              </button>
             </div>
-          </div>
-
-          <div className="mb-4">
-            <h4 className="text-lg font-semibold mb-2">Comments</h4>
-            <form onSubmit={handleAddComment} className="mb-2">
-              <textarea
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                className="w-full border rounded px-2 py-1"
-                rows={2}
-                placeholder="Add a comment..."
-              />
-              <button type="submit" className="mt-1 bg-indigo-600 text-white px-4 py-2 rounded">Add Comment</button>
-            </form>
-            <div className="space-y-2">
-              {comments.map(comment => (
-                <div key={comment._id} className="bg-gray-50 p-2 rounded">
-                  <p className="text-sm">{comment.text}</p>
-                  <p className="text-xs text-gray-500">By {comment.author.name} on {new Date(comment.createdAt).toLocaleString()}</p>
-                  <button onClick={() => handleDeleteComment(comment._id)} className="text-red-600 text-xs">Delete</button>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-between">
-            <button onClick={() => setIsEditing(true)} className="bg-blue-600 text-white px-4 py-2 rounded">Edit Task</button>
-            <button onClick={handleDelete} className="bg-red-600 text-white px-4 py-2 rounded">Delete Task</button>
-          </div>
+          )}
         </div>
       </div>
     </div>
