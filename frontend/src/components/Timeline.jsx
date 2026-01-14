@@ -23,7 +23,8 @@ import { useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
 // Draggable Task Component
-const DraggableTask = ({ task, isAdmin }) => {
+const DraggableTask = ({ task, user }) => {
+  const canDrag = user?.role === 'admin' || task.assignee?._id === user?.id;
   const {
     attributes,
     listeners,
@@ -57,8 +58,8 @@ const DraggableTask = ({ task, isAdmin }) => {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      {...(isAdmin ? listeners : {})}
-      className={`bg-white rounded shadow-sm p-3 border ${isAdmin ? 'cursor-move hover:shadow-md transition-shadow' : 'cursor-default'}`}
+      {...(canDrag ? listeners : {})}
+      className={`bg-white rounded shadow-sm p-3 border ${canDrag ? 'cursor-move hover:shadow-md transition-shadow' : 'cursor-default'}`}
     >
       <div className="flex justify-between items-start mb-2">
         <h4 className="font-medium text-gray-900 text-sm leading-tight">
@@ -81,7 +82,7 @@ const DraggableTask = ({ task, isAdmin }) => {
 };
 
 // Droppable Column Component
-const DroppableColumn = ({ statusKey, config, tasks, isAdmin }) => {
+const DroppableColumn = ({ statusKey, config, tasks, user }) => {
   const { setNodeRef, isOver } = useDroppable({
     id: statusKey,
   });
@@ -101,7 +102,7 @@ const DroppableColumn = ({ statusKey, config, tasks, isAdmin }) => {
       <div className="space-y-3 min-h-[200px]">
         <SortableContext items={tasks.map(task => task._id)} strategy={verticalListSortingStrategy}>
           {tasks.map((task) => (
-            <DraggableTask key={task._id} task={task} isAdmin={isAdmin} />
+            <DraggableTask key={task._id} task={task} user={user} />
           ))}
         </SortableContext>
         {tasks.length === 0 && (
@@ -240,7 +241,7 @@ const Timeline = () => {
                 statusKey={statusKey}
                 config={config}
                 tasks={tasksByStatus[statusKey] || []}
-                isAdmin={user?.role === 'admin'}
+                user={user}
               />
             ))}
           </div>
