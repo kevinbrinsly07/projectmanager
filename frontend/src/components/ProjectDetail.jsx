@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getProject, updateProject } from '../api/projects';
 import { getLists, createList } from '../api/lists';
@@ -26,6 +26,11 @@ const ProjectDetail = () => {
   const [users, setUsers] = useState([]);
   const [members, setMembers] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [adminTaskName, setAdminTaskName] = useState('');
+  const [adminTaskDescription, setAdminTaskDescription] = useState('');
+  const [adminTaskAssignee, setAdminTaskAssignee] = useState('');
+  const [adminTaskDueDate, setAdminTaskDueDate] = useState('');
+  const [adminTaskList, setAdminTaskList] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -116,6 +121,35 @@ const ProjectDetail = () => {
       await createTask({ name: newTaskName, list: listId });
       setNewTaskName('');
       fetchTasks();
+    } catch (error) {
+      console.error('Error creating task:', error);
+    }
+  };
+
+  const handleAdminCreateTask = async (e) => {
+    e.preventDefault();
+    if (!adminTaskName.trim() || !adminTaskList) return;
+    
+    try {
+      const taskData = {
+        name: adminTaskName,
+        description: adminTaskDescription,
+        list: adminTaskList,
+        assignee: adminTaskAssignee || undefined,
+        dueDate: adminTaskDueDate || undefined
+      };
+      
+      await createTask(taskData);
+      
+      // Reset form
+      setAdminTaskName('');
+      setAdminTaskDescription('');
+      setAdminTaskAssignee('');
+      setAdminTaskDueDate('');
+      setAdminTaskList('');
+      
+      fetchTasks();
+      fetchStats();
     } catch (error) {
       console.error('Error creating task:', error);
     }
@@ -263,6 +297,153 @@ const ProjectDetail = () => {
                   </svg>
                 </div>
               </div>
+              
+              {/* Admin Task Creation Section */}
+              {user?.role === 'admin' && (
+                <div className="mt-8 pt-8 border-t border-gray-200">
+                  <div className="flex items-center mb-6">
+                    <div className="bg-gradient-to-r from-red-600 to-red-600 p-2 rounded-xl mr-3">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900">Admin: Add Task</h3>
+                      <p className="text-gray-600">Create tasks directly for this project</p>
+                    </div>
+                  </div>
+                  
+                  <form onSubmit={handleAdminCreateTask} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="adminTaskName" className="block text-sm font-semibold text-gray-700 mb-3">
+                          Task Name *
+                        </label>
+                        <div className="relative">
+                          <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                          </svg>
+                          <input
+                            type="text"
+                            id="adminTaskName"
+                            value={adminTaskName}
+                            onChange={(e) => setAdminTaskName(e.target.value)}
+                            className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70"
+                            placeholder="Enter task name"
+                            required
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="adminTaskList" className="block text-sm font-semibold text-gray-700 mb-3">
+                          List *
+                        </label>
+                        <div className="relative">
+                          <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                          </svg>
+                          <select
+                            id="adminTaskList"
+                            value={adminTaskList}
+                            onChange={(e) => setAdminTaskList(e.target.value)}
+                            className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70 appearance-none"
+                            required
+                          >
+                            <option value="">Select a list</option>
+                            {lists.map((list) => (
+                              <option key={list._id} value={list._id}>
+                                {list.name}
+                              </option>
+                            ))}
+                          </select>
+                          <svg className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="adminTaskAssignee" className="block text-sm font-semibold text-gray-700 mb-3">
+                          Assignee
+                        </label>
+                        <div className="relative">
+                          <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                          <select
+                            id="adminTaskAssignee"
+                            value={adminTaskAssignee}
+                            onChange={(e) => setAdminTaskAssignee(e.target.value)}
+                            className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70 appearance-none"
+                          >
+                            <option value="">Select assignee (optional)</option>
+                            {users.map((user) => (
+                              <option key={user._id} value={user._id}>
+                                {user.name} ({user.email})
+                              </option>
+                            ))}
+                          </select>
+                          <svg className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="adminTaskDueDate" className="block text-sm font-semibold text-gray-700 mb-3">
+                          Due Date
+                        </label>
+                        <div className="relative">
+                          <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <input
+                            type="date"
+                            id="adminTaskDueDate"
+                            value={adminTaskDueDate}
+                            onChange={(e) => setAdminTaskDueDate(e.target.value)}
+                            className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="adminTaskDescription" className="block text-sm font-semibold text-gray-700 mb-3">
+                        Description
+                      </label>
+                      <div className="relative">
+                        <svg className="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                        <textarea
+                          id="adminTaskDescription"
+                          value={adminTaskDescription}
+                          onChange={(e) => setAdminTaskDescription(e.target.value)}
+                          rows={3}
+                          className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70 resize-none"
+                          placeholder="Describe the task (optional)"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-end">
+                      <button
+                        type="submit"
+                        className="bg-gradient-to-r from-red-600 to-red-600 text-white px-8 py-3 rounded-xl hover:from-red-700 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold flex items-center group"
+                      >
+                        <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Create Task
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
               
               <div className="flex justify-end space-x-4 pt-4">
                 <button

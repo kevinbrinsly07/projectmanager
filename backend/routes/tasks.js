@@ -1,5 +1,6 @@
 const express = require('express');
 const auth = require('../middleware/auth');
+const authorize = require('../middleware/authorize');
 const Task = require('../models/Task');
 const List = require('../models/List');
 const router = express.Router();
@@ -63,7 +64,7 @@ router.get('/user', auth, async (req, res) => {
 });
 
 // Create task
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, authorize(['admin']), async (req, res) => {
   console.log('=== CREATING TASK ===');
   console.log('Request body:', req.body);
   const task = new Task(req.body);
