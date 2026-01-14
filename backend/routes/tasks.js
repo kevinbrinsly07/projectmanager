@@ -81,6 +81,17 @@ router.post('/', auth, authorize(['admin']), async (req, res) => {
   try {
     const newTask = await task.save();
     console.log('Task created successfully:', newTask._id);
+    
+    // Send notification if task is assigned
+    if (newTask.assignee) {
+      const assignee = await User.findById(newTask.assignee);
+      if (assignee) {
+        const notificationMessage = `You have been assigned a new task: "${newTask.name}"`;
+        await createNotification(newTask.assignee, notificationMessage, 'task_assigned');
+        console.log('Notification sent to assignee:', assignee.name);
+      }
+    }
+    
     console.log('=== END ===\n');
     res.status(201).json(newTask);
   } catch (err) {
@@ -124,6 +135,18 @@ router.put('/:id', auth, async (req, res) => {
       .populate('list');
     
     console.log('Updated task:', task);
+    
+    // Check if assignee was changed
+    const oldAssignee = currentTask.assignee?._id?.toString();
+    const newAssignee = task.assignee?._id?.toString();
+    if (newAssignee && oldAssignee !== newAssignee) {
+      const assignee = await User.findById(newAssignee);
+      if (assignee) {
+        const notificationMessage = `You have been assigned a task: "${task.name}"`;
+        await createNotification(newAssignee, notificationMessage, 'task_assigned');
+        console.log('Notification sent to new assignee:', assignee.name);
+      }
+    }
     
     // Check if status was changed and user is not admin
     if (newStatus && oldStatus !== newStatus && currentUser.role !== 'admin') {

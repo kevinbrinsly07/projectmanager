@@ -2,6 +2,8 @@ const express = require('express');
 const auth = require('../middleware/auth');
 const authorize = require('../middleware/authorize');
 const Project = require('../models/Project');
+const User = require('../models/User');
+const { createNotification } = require('./notifications');
 const router = express.Router();
 
 // Get all projects
@@ -31,6 +33,18 @@ router.post('/', auth, authorize(['admin', 'manager']), async (req, res) => {
   });
   try {
     const newProject = await project.save();
+    
+    // Send notifications to members
+    if (newProject.members && newProject.members.length > 0) {
+      for (const memberId of newProject.members) {
+        const member = await User.findById(memberId);
+        if (member) {
+          const notificationMessage = `You have been added to a new project: "${newProject.name}"`;
+          await createNotification(memberId, notificationMessage, 'project_assigned');
+        }
+      }
+    }
+    
     res.status(201).json(newProject);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -65,7 +79,23 @@ router.put('/:id', auth, async (req, res) => {
     if (ownerId !== userId && !isMember && req.user.role !== 'admin' && req.user.role !== 'manager') {
       return res.status(403).json({ message: 'Not authorized' });
     }
+    
+    const oldMembers = project.members.map(m => m.toString());
     const updatedProject = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const newMembers = updatedProject.members.map(m => m.toString());
+    
+    // Find newly added members
+    const addedMembers = newMembers.filter(m => !oldMembers.includes(m));
+    
+    // Send notifications to newly added members
+    for (const memberId of addedMembers) {
+      const member = await User.findById(memberId);
+      if (member) {
+        const notificationMessage = `You have been added to the project: "${updatedProject.name}"`;
+        await createNotification(memberId, notificationMessage, 'project_assigned');
+      }
+    }
+    
     res.json(updatedProject);
   } catch (err) {
     res.status(400).json({ message: err.message });

@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { getNotifications, markAsRead } from '../api/notifications';
 
 const Layout = ({ children }) => {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
@@ -13,6 +14,11 @@ const Layout = ({ children }) => {
       fetchNotifications();
     }
   }, [user]);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   const fetchNotifications = async () => {
     try {
@@ -97,7 +103,7 @@ const Layout = ({ children }) => {
               </div>
             </div>
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="p-2 text-gray-400 hover:text-gray-600 hover:bg-red-50 rounded-lg transition-all duration-200"
               title="Logout"
             >

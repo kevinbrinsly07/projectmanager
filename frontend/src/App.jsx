@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
 import ProjectDetail from './components/ProjectDetail';
 import Login from './components/Login';
@@ -18,29 +19,39 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={
-            <Layout>
-              <Dashboard />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </ProtectedRoute>
           } />
           <Route path="/projects/:id" element={
-            <Layout>
-              <ProjectDetail />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <ProjectDetail />
+              </Layout>
+            </ProtectedRoute>
           } />
           <Route path="/admin" element={
-            <Layout>
-              <Admin />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <Admin />
+              </Layout>
+            </ProtectedRoute>
           } />
           <Route path="/timeline" element={
-            <Layout>
-              <Timeline />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <Timeline />
+              </Layout>
+            </ProtectedRoute>
           } />
           <Route path="/notifications" element={
-            <Layout>
-              <Notifications />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <Notifications />
+              </Layout>
+            </ProtectedRoute>
           } />
         </Routes>
       </Router>
