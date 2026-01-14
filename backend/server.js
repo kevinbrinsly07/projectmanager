@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 const corsOptions = {
-  origin: [
+  origin: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : [
     'http://localhost:3000',
     'http://localhost:5173',
     'https://projectmanager-frontend-v1qs.onrender.com'
