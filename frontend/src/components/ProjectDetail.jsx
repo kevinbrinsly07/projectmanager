@@ -11,6 +11,8 @@ import TaskModal from './TaskModal';
 const ProjectDetail = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
+  
+  console.log('ProjectDetail mounted with id:', id);
   const [project, setProject] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState('');
@@ -54,8 +56,10 @@ const ProjectDetail = () => {
   };
 
   const fetchProject = async () => {
+    console.log('Fetching project with id:', id);
     try {
       const foundProject = await getProject(id);
+      console.log('Fetched project:', foundProject);
       setProject(foundProject);
       setName(foundProject.name);
       setDescription(foundProject.description);

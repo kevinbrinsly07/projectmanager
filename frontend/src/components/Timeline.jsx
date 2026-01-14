@@ -131,7 +131,7 @@ const Timeline = () => {
   };
 
   // Filter tasks based on user role
-  const filteredTasks = user?.role === 'admin' ? tasks : tasks.filter(task => task.assignee?._id === user?._id);
+  const filteredTasks = user?.role === 'admin' ? tasks : tasks.filter(task => task.assignee?._id === user?.id);
 
   const sensors = useSensors(
     useSensor(PointerSensor),

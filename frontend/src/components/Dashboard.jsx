@@ -89,6 +89,7 @@ const Dashboard = () => {
   };
 
   const handleDeleteProject = async (id) => {
+    console.log('Deleting project with id:', id);
     try {
       await deleteProject(id);
       fetchProjects();
@@ -275,13 +276,22 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                      <Link to={`/projects/${project._id}`} className="text-blue-600 hover:text-blue-700 font-medium text-sm">
+                      <button
+                        onClick={() => {
+                          console.log('Navigating to project:', project._id);
+                          navigate(`/projects/${project._id}`);
+                        }}
+                        className="text-blue-600 hover:text-blue-700 font-medium text-sm"
+                      >
                         View Project
-                      </Link>
+                      </button>
 
                       {(user?.id === project.owner || user?.role === 'admin' || user?.role === 'manager') && (
                         <button
-                          onClick={() => handleDeleteProject(project._id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteProject(project._id);
+                          }}
                           className="text-red-600 hover:text-red-700 font-medium text-sm"
                         >
                           Delete
