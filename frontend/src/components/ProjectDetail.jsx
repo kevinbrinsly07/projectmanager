@@ -181,60 +181,9 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-50 to-blue-50">
-      {/* Professional Header */}
-      <header className="bg-white/80 backdrop-blur-lg shadow-xl border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <Link to="/" className="text-gray-600 hover:text-gray-900 mr-6 p-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 transition-all duration-300 group">
-                <svg className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-              </Link>
-              <div className="flex items-center">
-                <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                  </svg>
-                </div>
-                <div>
-                  <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
-                  <p className="text-gray-600">Project Management Dashboard</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/timeline"
-                className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 transition-all duration-300 hover:shadow-lg font-medium flex items-center group"
-              >
-                <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Timeline
-              </Link>
-              
-              {(user?.id === project.owner || user?.role === 'admin' || user?.role === 'manager') && (
-                <button
-                  onClick={() => setIsEditing(!isEditing)}
-                  className="bg-gradient-to-r from-blue-600 to-blue-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium flex items-center group"
-                >
-                  <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                  </svg>
-                  {isEditing ? 'Cancel' : 'Edit Project'}
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        {/* Edit Project Form */}
-        {isEditing && (
+    <div>
+      {/* Edit Project Form */}
+      {isEditing && (
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 mb-8 hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center mb-6">
               <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
@@ -470,16 +419,27 @@ const ProjectDetail = () => {
         {!isEditing && (
           <div className="mb-12">
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 hover:shadow-2xl transition-all duration-300">
-              <div className="flex items-center mb-6">
-                <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center">
+                  <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">Project Overview</h2>
+                    <p className="text-gray-600">Track your project's progress and metrics</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="bg-gradient-to-r from-blue-600 to-blue-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold flex items-center group"
+                >
+                  <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Project Overview</h2>
-                  <p className="text-gray-600">Track your project's progress and metrics</p>
-                </div>
+                  Edit Project
+                </button>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -555,79 +515,6 @@ const ProjectDetail = () => {
           </div>
         )}
 
-        {/* Status Board */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center">
-              <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
-                </svg>
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900">Task Board</h2>
-                <p className="text-gray-600">Organize and track your team's workflow by status</p>
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="text-3xl font-bold text-gray-900">{tasks.length}</div>
-              <div className="text-sm text-gray-600 uppercase tracking-wide">Total Tasks</div>
-            </div>
-          </div>
-
-          {/* Status Columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-            {Object.entries(statusConfig).map(([statusKey, config]) => (
-              <div
-                key={statusKey}
-                className={`rounded-lg border-2 ${config.color} p-4 transition-colors min-h-[400px]`}
-              >
-                <div className={`rounded-t ${config.headerColor} px-3 py-2 mb-3`}>
-                  <h3 className="font-semibold text-gray-800 text-sm">
-                    {config.label} ({tasksByStatus[statusKey]?.length || 0})
-                  </h3>
-                </div>
-                <div className="space-y-3 min-h-[300px]">
-                  {tasksByStatus[statusKey]?.map((task) => (
-                    <div
-                      key={task._id}
-                      className="bg-white rounded shadow-sm p-3 border cursor-pointer hover:shadow-md transition-shadow"
-                      onClick={() => handleTaskClick(task)}
-                    >
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-medium text-gray-900 text-sm leading-tight flex-1">
-                          {task.name}
-                        </h4>
-                        {task.priority && (
-                          <span className={`px-2 py-1 rounded text-xs font-medium ml-2 ${getPriorityColor(task.priority)}`}>
-                            {task.priority}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-gray-600 mb-2 line-clamp-2">
-                        {task.description}
-                      </p>
-                      <div className="text-xs text-gray-500 space-y-1">
-                        <p>List: {task.list?.name || 'Unknown'}</p>
-                        <p>Due: {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date'}</p>
-                        {task.assignee && (
-                          <p>Assigned to: {task.assignee.name}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                  {(!tasksByStatus[statusKey] || tasksByStatus[statusKey].length === 0) && (
-                    <div className="text-center text-gray-400 text-sm py-8 border-2 border-dashed border-gray-300 rounded">
-                      No tasks in {config.label.toLowerCase()}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </main>
-      
       {selectedTask && (
         <TaskModal
           task={selectedTask}

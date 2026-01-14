@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import ProjectDetail from './components/ProjectDetail';
 import Login from './components/Login';
@@ -15,10 +16,26 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/timeline" element={<Timeline />} />
+          <Route path="/" element={
+            <Layout>
+              <Dashboard />
+            </Layout>
+          } />
+          <Route path="/projects/:id" element={
+            <Layout>
+              <ProjectDetail />
+            </Layout>
+          } />
+          <Route path="/admin" element={
+            <Layout>
+              <Admin />
+            </Layout>
+          } />
+          <Route path="/timeline" element={
+            <Layout>
+              <Timeline />
+            </Layout>
+          } />
         </Routes>
       </Router>
     </AuthProvider>

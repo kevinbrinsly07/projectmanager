@@ -223,9 +223,8 @@ const Timeline = () => {
   const getStatusCount = (status) => tasksByStatus[status]?.length || 0;
 
   return (
-    <div className="min-h-screen bg-gray-100 py-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Project Timeline</h1>
+    <div>
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">Project Timeline</h1>
 
         <DndContext
           sensors={sensors}
@@ -291,7 +290,6 @@ const Timeline = () => {
             <p className="text-gray-500">No tasks assigned to you yet.</p>
           </div>
         )}
-      </div>
     </div>
   );
 };
