@@ -128,33 +128,33 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-indigo-50 to-cyan-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-50 to-blue-50">
       {/* Professional Header */}
       <header className="bg-white/80 backdrop-blur-lg shadow-xl border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <Link to="/" className="text-slate-600 hover:text-slate-900 mr-6 p-2 rounded-xl hover:bg-gradient-to-r hover:from-violet-50 hover:to-indigo-50 transition-all duration-300 group">
+              <Link to="/" className="text-gray-600 hover:text-gray-900 mr-6 p-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 transition-all duration-300 group">
                 <svg className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
               </Link>
               <div className="flex items-center">
-                <div className="bg-gradient-to-r from-violet-600 to-indigo-600 p-3 rounded-2xl mr-4">
+                <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-slate-900">{project.name}</h1>
-                  <p className="text-slate-600">Project Management Dashboard</p>
+                  <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
+                  <p className="text-gray-600">Project Management Dashboard</p>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@ const ProjectDetail = () => {
               {(user?.id === project.owner || user?.role === 'admin' || user?.role === 'manager') && (
                 <button
                   onClick={() => setIsEditing(!isEditing)}
-                  className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-violet-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium flex items-center group"
+                  className="bg-gradient-to-r from-blue-600 to-blue-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium flex items-center group"
                 >
                   <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -181,24 +181,24 @@ const ProjectDetail = () => {
         {isEditing && (
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 mb-8 hover:shadow-2xl transition-all duration-300">
             <div className="flex items-center mb-6">
-              <div className="bg-gradient-to-r from-violet-600 to-indigo-600 p-3 rounded-2xl mr-4">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-slate-900">Edit Project</h2>
-                <p className="text-slate-600">Update project details and team members</p>
+                <h2 className="text-2xl font-bold text-gray-900">Edit Project</h2>
+                <p className="text-gray-600">Update project details and team members</p>
               </div>
             </div>
             <form onSubmit={handleUpdateProject} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-3">
+                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-3">
                     Project Name
                   </label>
                   <div className="relative">
-                    <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                     <input
@@ -206,7 +206,7 @@ const ProjectDetail = () => {
                       id="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70"
+                      className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70"
                       placeholder="Enter project name"
                       required
                     />
@@ -214,11 +214,11 @@ const ProjectDetail = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="description" className="block text-sm font-semibold text-slate-700 mb-3">
+                  <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-3">
                     Description
                   </label>
                   <div className="relative">
-                    <svg className="absolute left-4 top-4 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
                     </svg>
                     <textarea
@@ -226,7 +226,7 @@ const ProjectDetail = () => {
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                       rows={4}
-                      className="w-full pl-12 pr-4 py-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70 resize-none"
+                      className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70 resize-none"
                       placeholder="Describe your project"
                     />
                   </div>
@@ -234,18 +234,18 @@ const ProjectDetail = () => {
               </div>
               
               <div>
-                <label htmlFor="members" className="block text-sm font-semibold text-slate-700 mb-3">
+                <label htmlFor="members" className="block text-sm font-semibold text-gray-700 mb-3">
                   Team Members
                 </label>
                 <div className="relative">
-                  <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                   </svg>
                   <select
                     id="members"
                     value={members.length > 0 ? members[0] : ''}
                     onChange={(e) => setMembers(e.target.value ? [e.target.value] : [])}
-                    className="w-full pl-12 pr-4 py-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70 appearance-none"
+                    className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70 appearance-none"
                   >
                     <option value="">Select a team member</option>
                     {users.map((user) => (
@@ -254,7 +254,7 @@ const ProjectDetail = () => {
                       </option>
                     ))}
                   </select>
-                  <svg className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
@@ -264,13 +264,13 @@ const ProjectDetail = () => {
                 <button
                   type="button"
                   onClick={() => setIsEditing(false)}
-                  className="px-6 py-3 text-slate-600 hover:text-slate-900 transition-all duration-300 font-medium rounded-xl hover:bg-slate-100"
+                  className="px-6 py-3 text-gray-600 hover:text-gray-900 transition-all duration-300 font-medium rounded-xl hover:bg-gray-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-8 py-3 rounded-xl hover:from-violet-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold flex items-center group"
+                  className="bg-gradient-to-r from-blue-600 to-blue-600 text-white px-8 py-3 rounded-xl hover:from-blue-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold flex items-center group"
                 >
                   <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -287,32 +287,32 @@ const ProjectDetail = () => {
           <div className="mb-12">
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 hover:shadow-2xl transition-all duration-300">
               <div className="flex items-center mb-6">
-                <div className="bg-gradient-to-r from-violet-600 to-indigo-600 p-3 rounded-2xl mr-4">
+                <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900">Project Overview</h2>
-                  <p className="text-slate-600">Track your project's progress and metrics</p>
+                  <h2 className="text-2xl font-bold text-gray-900">Project Overview</h2>
+                  <p className="text-gray-600">Track your project's progress and metrics</p>
                 </div>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="bg-gradient-to-br from-violet-50 to-indigo-50 rounded-xl p-6 border border-violet-100">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-50 rounded-xl p-6 border border-blue-100">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="bg-gradient-to-r from-violet-500 to-indigo-500 p-3 rounded-xl">
+                    <div className="bg-gradient-to-r from-blue-500 to-blue-500 p-3 rounded-xl">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                       </svg>
                     </div>
                     <div className="text-right">
-                      <div className="text-3xl font-bold text-violet-600">{stats.totalTasks || 0}</div>
-                      <div className="text-sm text-slate-600 uppercase tracking-wide">Total Tasks</div>
+                      <div className="text-3xl font-bold text-blue-600">{stats.totalTasks || 0}</div>
+                      <div className="text-sm text-gray-600 uppercase tracking-wide">Total Tasks</div>
                     </div>
                   </div>
-                  <div className="w-full bg-violet-200 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-violet-500 to-indigo-500 h-2 rounded-full transition-all duration-500" style={{ width: '100%' }}></div>
+                  <div className="w-full bg-blue-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-blue-500 to-blue-500 h-2 rounded-full transition-all duration-500" style={{ width: '100%' }}></div>
                   </div>
                 </div>
                 
@@ -325,7 +325,7 @@ const ProjectDetail = () => {
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-green-600">{stats.completedTasks || 0}</div>
-                      <div className="text-sm text-slate-600 uppercase tracking-wide">Completed</div>
+                      <div className="text-sm text-gray-600 uppercase tracking-wide">Completed</div>
                     </div>
                   </div>
                   <div className="w-full bg-green-200 rounded-full h-2">
@@ -342,7 +342,7 @@ const ProjectDetail = () => {
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-yellow-600">{stats.inProgressTasks || 0}</div>
-                      <div className="text-sm text-slate-600 uppercase tracking-wide">In Progress</div>
+                      <div className="text-sm text-gray-600 uppercase tracking-wide">In Progress</div>
                     </div>
                   </div>
                   <div className="w-full bg-yellow-200 rounded-full h-2">
@@ -350,20 +350,20 @@ const ProjectDetail = () => {
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-100">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-50 rounded-xl p-6 border border-blue-100">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-3 rounded-xl">
+                    <div className="bg-gradient-to-r from-blue-500 to-blue-500 p-3 rounded-xl">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-blue-600">{stats.totalTime || 0}</div>
-                      <div className="text-sm text-slate-600 uppercase tracking-wide">Total Time (min)</div>
+                      <div className="text-sm text-gray-600 uppercase tracking-wide">Total Time (min)</div>
                     </div>
                   </div>
                   <div className="w-full bg-blue-200 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full transition-all duration-500" style={{ width: '75%' }}></div>
+                    <div className="bg-gradient-to-r from-blue-500 to-blue-500 h-2 rounded-full transition-all duration-500" style={{ width: '75%' }}></div>
                   </div>
                 </div>
               </div>
@@ -375,19 +375,19 @@ const ProjectDetail = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center">
-              <div className="bg-gradient-to-r from-violet-600 to-indigo-600 p-3 rounded-2xl mr-4">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-600 p-3 rounded-2xl mr-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
                 </svg>
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-slate-900">Task Board</h2>
-                <p className="text-slate-600">Organize and track your team's workflow</p>
+                <h2 className="text-3xl font-bold text-gray-900">Task Board</h2>
+                <p className="text-gray-600">Organize and track your team's workflow</p>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-3xl font-bold text-slate-900">{lists.length}</div>
-              <div className="text-sm text-slate-600 uppercase tracking-wide">Active Lists</div>
+              <div className="text-3xl font-bold text-gray-900">{lists.length}</div>
+              <div className="text-sm text-gray-600 uppercase tracking-wide">Active Lists</div>
             </div>
           </div>
           
@@ -401,14 +401,14 @@ const ProjectDetail = () => {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center">
-                      <div className="bg-gradient-to-r from-violet-100 to-indigo-100 p-2 rounded-xl mr-3">
-                        <svg className="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="bg-gradient-to-r from-blue-100 to-blue-100 p-2 rounded-xl mr-3">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                       </div>
-                      <h3 className="text-xl font-bold text-slate-900">{list.name}</h3>
+                      <h3 className="text-xl font-bold text-gray-900">{list.name}</h3>
                     </div>
-                    <span className="bg-gradient-to-r from-violet-100 to-indigo-100 text-violet-700 px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-gradient-to-r from-blue-100 to-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
                       {tasks.filter(task => task.list._id === list._id).length}
                     </span>
                   </div>
@@ -420,15 +420,15 @@ const ProjectDetail = () => {
                         className="group bg-white/80 backdrop-blur-sm rounded-xl p-4 cursor-pointer hover:bg-white/90 transition-all duration-300 border border-white/20 hover:shadow-lg hover:scale-105 hover:-translate-y-1"
                         onClick={() => handleTaskClick(task)}
                       >
-                        <h4 className="text-sm font-semibold text-slate-900 mb-3 group-hover:text-violet-700 transition-colors duration-300">{task.name}</h4>
-                        <div className="flex items-center justify-between text-xs text-slate-600 mb-3">
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors duration-300">{task.name}</h4>
+                        <div className="flex items-center justify-between text-xs text-gray-600 mb-3">
                           <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                             task.status === 'done' ? 'bg-green-100 text-green-800' :
                             task.status === 'inprogress' ? 'bg-yellow-100 text-yellow-800' :
                             task.status === 'await_release' ? 'bg-blue-100 text-blue-800' :
-                            task.status === 'in_review' ? 'bg-purple-100 text-purple-800' :
+                            task.status === 'in_review' ? 'bg-blue-100 text-blue-800' :
                             task.status === 'reopened' ? 'bg-red-100 text-red-800' :
-                            'bg-slate-100 text-slate-800'
+                            'bg-gray-100 text-gray-800'
                           }`}>
                             {task.status === 'todo' ? 'To Do' :
                              task.status === 'inprogress' ? 'In Progress' :
@@ -438,11 +438,11 @@ const ProjectDetail = () => {
                              task.status === 'closed' ? 'Closed' : task.status}
                           </span>
                           {task.assignee && (
-                            <span className="text-slate-500">{task.assignee.name}</span>
+                            <span className="text-gray-500">{task.assignee.name}</span>
                           )}
                         </div>
                         {task.dueDate && (
-                          <div className="flex items-center text-xs text-slate-500">
+                          <div className="flex items-center text-xs text-gray-500">
                             <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -452,8 +452,8 @@ const ProjectDetail = () => {
                       </div>
                     ))}
                     {tasks.filter(task => task.list._id === list._id).length === 0 && (
-                      <div className="text-center py-8 text-slate-400">
-                        <svg className="w-12 h-12 mx-auto mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="text-center py-8 text-gray-400">
+                        <svg className="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                         <p className="text-sm">No tasks yet</p>
@@ -462,7 +462,7 @@ const ProjectDetail = () => {
                   </div>
                   
                   {/* Add Task Button */}
-                  <button className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-4 py-3 rounded-xl hover:from-violet-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium flex items-center justify-center group">
+                  <button className="w-full bg-gradient-to-r from-blue-600 to-blue-600 text-white px-4 py-3 rounded-xl hover:from-blue-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium flex items-center justify-center group">
                     <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>

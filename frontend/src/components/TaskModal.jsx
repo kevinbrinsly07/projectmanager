@@ -173,27 +173,27 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full z-50" onClick={onClose}>
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 overflow-y-auto h-full w-full z-50" onClick={onClose}>
       <div className="relative top-8 mx-auto p-6 w-11/12 max-w-4xl" onClick={e => e.stopPropagation()}>
-        <div className="bg-white rounded-xl shadow-xl border border-slate-200">
+        <div className="bg-white rounded-xl shadow-xl border border-gray-200">
           {/* Header */}
-          <div className="flex justify-between items-center p-6 border-b border-slate-200">
+          <div className="flex justify-between items-center p-6 border-b border-gray-200">
             <div className="flex-1">
               {isEditing ? (
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="text-2xl font-bold text-slate-900 border-0 border-b-2 border-indigo-500 focus:ring-0 focus:border-indigo-600 px-0 py-1 w-full bg-transparent"
+                  className="text-2xl font-bold text-gray-900 border-0 border-b-2 border-blue-500 focus:ring-0 focus:border-blue-600 px-0 py-1 w-full bg-transparent"
                   placeholder="Task name"
                 />
               ) : (
-                <h3 className="text-2xl font-bold text-slate-900">{task.name}</h3>
+                <h3 className="text-2xl font-bold text-gray-900">{task.name}</h3>
               )}
             </div>
             <button 
               onClick={onClose} 
-              className="text-slate-400 hover:text-slate-600 p-2 hover:bg-slate-100 rounded-lg transition-colors duration-200"
+              className="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -206,14 +206,14 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
             {isEditing ? (
               <div className="space-y-6">
                 <div>
-                  <label htmlFor="description" className="block text-sm font-medium text-slate-700 mb-2">
+                  <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
                     Description
                   </label>
                   <textarea
                     id="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-none"
                     rows={3}
                     placeholder="Describe this task..."
                   />
@@ -221,14 +221,14 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="assignee" className="block text-sm font-medium text-slate-700 mb-2">
+                    <label htmlFor="assignee" className="block text-sm font-medium text-gray-700 mb-2">
                       Assignee
                     </label>
                     <select
                       id="assignee"
                       value={assignee}
                       onChange={(e) => setAssignee(e.target.value)}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
                     >
                       <option value="">Unassigned</option>
                       {users.map(user => (
@@ -238,7 +238,7 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                   </div>
                   
                   <div>
-                    <label htmlFor="dueDate" className="block text-sm font-medium text-slate-700 mb-2">
+                    <label htmlFor="dueDate" className="block text-sm font-medium text-gray-700 mb-2">
                       Due Date
                     </label>
                     <input
@@ -246,19 +246,19 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                       type="date"
                       value={dueDate}
                       onChange={(e) => setDueDate(e.target.value)}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="priority" className="block text-sm font-medium text-slate-700 mb-2">
+                    <label htmlFor="priority" className="block text-sm font-medium text-gray-700 mb-2">
                       Priority
                     </label>
                     <select
                       id="priority"
                       value={priority}
                       onChange={(e) => setPriority(e.target.value)}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
                     >
                       <option value="low">Low</option>
                       <option value="medium">Medium</option>
@@ -267,14 +267,14 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                   </div>
                   
                   <div>
-                    <label htmlFor="status" className="block text-sm font-medium text-slate-700 mb-2">
+                    <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-2">
                       Status
                     </label>
                     <select
                       id="status"
                       value={status}
                       onChange={(e) => setStatus(e.target.value)}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
                     >
                       <option value="todo">To Do</option>
                       <option value="inprogress">In Progress</option>
@@ -286,14 +286,14 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                   </div>
                   
                   <div className="md:col-span-2">
-                    <label htmlFor="list" className="block text-sm font-medium text-slate-700 mb-2">
+                    <label htmlFor="list" className="block text-sm font-medium text-gray-700 mb-2">
                       List
                     </label>
                     <select
                       id="list"
                       value={list}
                       onChange={(e) => setList(e.target.value)}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
                     >
                       {lists.map(l => (
                         <option key={l._id} value={l.name}>{l.name}</option>
@@ -302,16 +302,16 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                   </div>
                 </div>
                 
-                <div className="flex justify-end space-x-4 pt-4 border-t border-slate-200">
+                <div className="flex justify-end space-x-4 pt-4 border-t border-gray-200">
                   <button 
                     onClick={() => setIsEditing(false)} 
-                    className="px-4 py-2 text-slate-600 hover:text-slate-900 transition-colors duration-200 font-medium"
+                    className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium"
                   >
                     Cancel
                   </button>
                   <button 
                     onClick={handleSave} 
-                    className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
                   >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -325,8 +325,8 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
               <div className="space-y-6">
                 {/* Task Overview */}
                 <div>
-                  <h4 className="text-sm font-medium text-slate-700 mb-2">Description</h4>
-                  <p className="text-slate-600 bg-slate-50 rounded-lg p-4">{task.description || 'No description provided'}</p>
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">Description</h4>
+                  <p className="text-gray-600 bg-gray-50 rounded-lg p-4">{task.description || 'No description provided'}</p>
                   
                   <div className="flex flex-wrap gap-2 mt-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -340,10 +340,10 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       status === 'done' ? 'bg-green-100 text-green-800' :
                       status === 'inprogress' ? 'bg-blue-100 text-blue-800' :
-                      status === 'await_release' ? 'bg-indigo-100 text-indigo-800' :
-                      status === 'in_review' ? 'bg-purple-100 text-purple-800' :
+                      status === 'await_release' ? 'bg-blue-100 text-blue-800' :
+                      status === 'in_review' ? 'bg-blue-100 text-blue-800' :
                       status === 'reopened' ? 'bg-red-100 text-red-800' :
-                      'bg-slate-100 text-slate-800'
+                      'bg-gray-100 text-gray-800'
                     }`}>
                       {status === 'todo' ? 'To Do' :
                        status === 'inprogress' ? 'In Progress' :
@@ -354,7 +354,7 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                     </span>
                     
                     {task.assignee && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                         Assigned to {task.assignee.name}
                       </span>
                     )}
@@ -368,9 +368,9 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                 </div>
 
                 {/* Time Tracking */}
-                <div className="border-t border-slate-200 pt-6">
+                <div className="border-t border-gray-200 pt-6">
                   <div className="flex justify-between items-center mb-4">
-                    <h4 className="text-lg font-semibold text-slate-900">Time Tracking</h4>
+                    <h4 className="text-lg font-semibold text-gray-900">Time Tracking</h4>
                     {isTracking ? (
                       <button 
                         onClick={handleStopTracking} 
@@ -398,12 +398,12 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                   {timeLogs.length > 0 && (
                     <div className="space-y-3">
                       {timeLogs.map(log => (
-                        <div key={log._id} className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                        <div key={log._id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-slate-900">{log.user.name}</span>
-                            <span className="text-sm text-slate-600">{log.duration || 'Ongoing'} minutes</span>
+                            <span className="text-sm font-medium text-gray-900">{log.user.name}</span>
+                            <span className="text-sm text-gray-600">{log.duration || 'Ongoing'} minutes</span>
                           </div>
-                          <p className="text-xs text-slate-500 mt-1">
+                          <p className="text-xs text-gray-500 mt-1">
                             {new Date(log.startTime).toLocaleString()} - {log.endTime ? new Date(log.endTime).toLocaleString() : 'Ongoing'}
                           </p>
                         </div>
@@ -413,20 +413,20 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                 </div>
 
                 {/* Subtasks */}
-                <div className="border-t border-slate-200 pt-6">
-                  <h4 className="text-lg font-semibold text-slate-900 mb-4">Subtasks</h4>
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Subtasks</h4>
                   <form onSubmit={handleCreateSubtask} className="mb-4">
                     <div className="flex gap-2">
                       <input
                         type="text"
                         value={newSubtaskName}
                         onChange={(e) => setNewSubtaskName(e.target.value)}
-                        className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
                         placeholder="Add a new subtask..."
                       />
                       <button 
                         type="submit" 
-                        className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
                       >
                         <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -439,9 +439,9 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                   {task.subtasks && task.subtasks.length > 0 && (
                     <div className="space-y-2">
                       {task.subtasks.map(subtask => (
-                        <div key={subtask._id} className="bg-slate-50 rounded-lg p-3 border border-slate-200">
-                          <p className="text-sm text-slate-900">{subtask.name}</p>
-                          <p className="text-xs text-slate-500 mt-1">{subtask.status}</p>
+                        <div key={subtask._id} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                          <p className="text-sm text-gray-900">{subtask.name}</p>
+                          <p className="text-xs text-gray-500 mt-1">{subtask.status}</p>
                         </div>
                       ))}
                     </div>
@@ -449,25 +449,25 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                 </div>
 
                 {/* Attachments */}
-                <div className="border-t border-slate-200 pt-6">
-                  <h4 className="text-lg font-semibold text-slate-900 mb-4">Attachments</h4>
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Attachments</h4>
                   <div className="mb-4">
                     <input 
                       type="file" 
                       onChange={handleFileUpload} 
-                      className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-colors duration-200"
+                      className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors duration-200"
                     />
                   </div>
                   
                   {attachments.length > 0 && (
                     <div className="space-y-2">
                       {attachments.map(attachment => (
-                        <div key={attachment._id} className="flex justify-between items-center bg-slate-50 rounded-lg p-3 border border-slate-200">
+                        <div key={attachment._id} className="flex justify-between items-center bg-gray-50 rounded-lg p-3 border border-gray-200">
                           <a 
                             href={`http://localhost:5000/uploads/${attachment.filename}`} 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            className="text-indigo-600 hover:text-indigo-700 font-medium flex items-center"
+                            className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
                           >
                             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
@@ -489,20 +489,20 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                 </div>
 
                 {/* Comments */}
-                <div className="border-t border-slate-200 pt-6">
-                  <h4 className="text-lg font-semibold text-slate-900 mb-4">Comments</h4>
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Comments</h4>
                   <form onSubmit={handleAddComment} className="mb-4">
                     <textarea
                       value={newComment}
                       onChange={(e) => setNewComment(e.target.value)}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-none"
                       rows={3}
                       placeholder="Add a comment..."
                     />
                     <div className="flex justify-end mt-2">
                       <button 
                         type="submit" 
-                        className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm flex items-center"
                       >
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -515,10 +515,10 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
                   {comments.length > 0 && (
                     <div className="space-y-4">
                       {comments.map(comment => (
-                        <div key={comment._id} className="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                          <p className="text-sm text-slate-900 mb-2">{comment.text}</p>
+                        <div key={comment._id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                          <p className="text-sm text-gray-900 mb-2">{comment.text}</p>
                           <div className="flex justify-between items-center">
-                            <p className="text-xs text-slate-500">
+                            <p className="text-xs text-gray-500">
                               By {comment.author.name} on {new Date(comment.createdAt).toLocaleString()}
                             </p>
                             <button 
@@ -539,7 +539,7 @@ const TaskModal = ({ task, onClose, onUpdate, users, lists }) => {
 
           {/* Footer Actions */}
           {!isEditing && (
-            <div className="flex justify-between items-center p-6 border-t border-slate-200 bg-slate-50 rounded-b-xl">
+            <div className="flex justify-between items-center p-6 border-t border-gray-200 bg-gray-50 rounded-b-xl">
               <button 
                 onClick={() => setIsEditing(true)} 
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm flex items-center"

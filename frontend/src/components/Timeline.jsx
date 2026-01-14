@@ -126,7 +126,7 @@ const Timeline = () => {
     reopened: { label: 'Reopened', color: 'bg-red-100 border-red-300', headerColor: 'bg-red-200' },
     inprogress: { label: 'In Progress', color: 'bg-yellow-100 border-yellow-300', headerColor: 'bg-yellow-200' },
     await_release: { label: 'Await Release', color: 'bg-blue-100 border-blue-300', headerColor: 'bg-blue-200' },
-    in_review: { label: 'In Review', color: 'bg-purple-100 border-purple-300', headerColor: 'bg-purple-200' },
+    in_review: { label: 'In Review', color: 'bg-blue-100 border-blue-300', headerColor: 'bg-blue-200' },
     closed: { label: 'Closed', color: 'bg-green-100 border-green-300', headerColor: 'bg-green-200' }
   };
 

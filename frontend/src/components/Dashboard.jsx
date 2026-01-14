@@ -121,25 +121,25 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-indigo-50 to-cyan-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-50 to-blue-50">
       {/* Enhanced Header with Glass Effect */}
       <header className="bg-white/80 backdrop-blur-lg shadow-xl border-b border-white/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-xl blur opacity-25"></div>
-                <div className="relative bg-gradient-to-r from-violet-600 to-indigo-600 p-2 rounded-xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-600 rounded-xl blur opacity-25"></div>
+                <div className="relative bg-gradient-to-r from-blue-600 to-blue-600 p-2 rounded-xl">
                   <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-blue-600 to-blue-600 bg-clip-text text-transparent">
                   ProjectFlow
                 </h1>
-                <p className="text-xs text-slate-500 -mt-1">Streamline your workflow</p>
+                <p className="text-xs text-gray-500 -mt-1">Streamline your workflow</p>
               </div>
             </div>
 
@@ -148,7 +148,7 @@ const Dashboard = () => {
               <div className="relative">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className="relative p-3 text-slate-600 hover:text-slate-900 hover:bg-gradient-to-r hover:from-violet-50 hover:to-indigo-50 rounded-xl transition-all duration-300 hover:shadow-lg group"
+                  className="relative p-3 text-gray-600 hover:text-gray-900 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 rounded-xl transition-all duration-300 hover:shadow-lg group"
                 >
                   <svg className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM15 17H9a6 6 0 01-6-6V9a6 6 0 0110.293-4.293L15 6.414V17z" />
@@ -163,9 +163,9 @@ const Dashboard = () => {
 
                 {showNotifications && (
                   <div className="absolute right-0 mt-3 w-80 bg-white/95 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl z-50 animate-in slide-in-from-top-2 duration-300">
-                    <div className="p-4 border-b border-slate-200/50">
-                      <h3 className="text-sm font-semibold text-slate-900 flex items-center">
-                        <svg className="w-4 h-4 mr-2 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="p-4 border-b border-gray-200/50">
+                      <h3 className="text-sm font-semibold text-gray-900 flex items-center">
+                        <svg className="w-4 h-4 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM15 17H9a6 6 0 01-6-6V9a6 6 0 0110.293-4.293L15 6.414V17z" />
                         </svg>
                         Notifications
@@ -174,24 +174,24 @@ const Dashboard = () => {
 
                     <div className="max-h-96 overflow-y-auto">
                       {notifications.length === 0 ? (
-                        <div className="p-6 text-center text-slate-500">
+                        <div className="p-6 text-center text-gray-500">
                           <p className="text-sm">You're all caught up!</p>
                         </div>
                       ) : (
                         notifications.slice(0, 5).map((notification) => (
                           <div
                             key={notification._id}
-                            className={`p-4 border-b border-slate-100/50 hover:bg-gradient-to-r hover:from-violet-50/50 hover:to-indigo-50/50 transition-all duration-200 ${
-                              !notification.read ? 'bg-gradient-to-r from-blue-50/50 to-indigo-50/50' : ''
+                            className={`p-4 border-b border-gray-100/50 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-blue-50/50 transition-all duration-200 ${
+                              !notification.read ? 'bg-gradient-to-r from-blue-50/50 to-blue-50/50' : ''
                             }`}
                           >
-                            <p className="text-sm text-slate-900 mb-2">{notification.message}</p>
+                            <p className="text-sm text-gray-900 mb-2">{notification.message}</p>
                             <div className="flex items-center justify-between">
-                              <p className="text-xs text-slate-500">{new Date(notification.createdAt).toLocaleString()}</p>
+                              <p className="text-xs text-gray-500">{new Date(notification.createdAt).toLocaleString()}</p>
                               {!notification.read && (
                                 <button
                                   onClick={() => handleMarkAsRead(notification._id)}
-                                  className="text-xs text-violet-600 hover:text-violet-700 transition-colors duration-200 font-medium hover:bg-violet-50 px-2 py-1 rounded-lg"
+                                  className="text-xs text-blue-600 hover:text-blue-700 transition-colors duration-200 font-medium hover:bg-blue-50 px-2 py-1 rounded-lg"
                                 >
                                   Mark as read
                                 </button>
@@ -210,7 +210,7 @@ const Dashboard = () => {
                 {user && user.role === 'admin' && (
                   <Link
                     to="/admin"
-                    className="text-slate-600 hover:text-slate-900 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-violet-50 hover:to-indigo-50 transition-all duration-300 hover:shadow-lg font-medium flex items-center group"
+                    className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 transition-all duration-300 hover:shadow-lg font-medium flex items-center group"
                   >
                     Admin
                   </Link>
@@ -218,14 +218,14 @@ const Dashboard = () => {
 
                 <Link
                   to="/timeline"
-                  className="text-slate-600 hover:text-slate-900 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-violet-50 hover:to-indigo-50 transition-all duration-300 hover:shadow-lg font-medium flex items-center group"
+                  className="text-gray-600 hover:text-gray-900 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 transition-all duration-300 hover:shadow-lg font-medium flex items-center group"
                 >
                   Timeline
                 </Link>
 
                 <button
                   onClick={logout}
-                  className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-6 py-2 rounded-xl hover:from-violet-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium flex items-center group"
+                  className="bg-gradient-to-r from-blue-600 to-blue-600 text-white px-6 py-2 rounded-xl hover:from-blue-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium flex items-center group"
                 >
                   Logout
                 </button>
@@ -241,8 +241,8 @@ const Dashboard = () => {
           <div className="mb-12">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-3xl font-bold text-slate-900">Your Projects</h2>
-                <p className="text-slate-600">Manage and track your team's progress</p>
+                <h2 className="text-3xl font-bold text-gray-900">Your Projects</h2>
+                <p className="text-gray-600">Manage and track your team's progress</p>
               </div>
             </div>
 
@@ -256,26 +256,26 @@ const Dashboard = () => {
                   <div className="relative p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">{project.name}</h3>
-                        <p className="text-slate-600 line-clamp-2 text-sm">{project.description}</p>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">{project.name}</h3>
+                        <p className="text-gray-600 line-clamp-2 text-sm">{project.description}</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div className="bg-slate-50 rounded-lg p-3">
-                        <div className="text-2xl font-bold text-indigo-600">{projectTasks[project._id]?.length || 0}</div>
-                        <div className="text-xs text-slate-600 uppercase tracking-wide">Tasks</div>
+                      <div className="bg-gray-50 rounded-lg p-3">
+                        <div className="text-2xl font-bold text-blue-600">{projectTasks[project._id]?.length || 0}</div>
+                        <div className="text-xs text-gray-600 uppercase tracking-wide">Tasks</div>
                       </div>
-                      <div className="bg-slate-50 rounded-lg p-3">
+                      <div className="bg-gray-50 rounded-lg p-3">
                         <div className="text-2xl font-bold text-green-600">
                           {projectTasks[project._id]?.filter((t) => t.status === 'done').length || 0}
                         </div>
-                        <div className="text-xs text-slate-600 uppercase tracking-wide">Completed</div>
+                        <div className="text-xs text-gray-600 uppercase tracking-wide">Completed</div>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-                      <Link to={`/projects/${project._id}`} className="text-indigo-600 hover:text-indigo-700 font-medium text-sm">
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                      <Link to={`/projects/${project._id}`} className="text-blue-600 hover:text-blue-700 font-medium text-sm">
                         View Project
                       </Link>
 
@@ -297,10 +297,10 @@ const Dashboard = () => {
           {/* Create Project Section */}
           {user && (user.role === 'admin' || user.role === 'manager') && (
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">Create New Project</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Create New Project</h3>
               <form onSubmit={handleCreateProject} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-2">
+                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
                     Project Name
                   </label>
                   <input
@@ -308,13 +308,13 @@ const Dashboard = () => {
                     id="name"
                     value={newProjectName}
                     onChange={(e) => setNewProjectName(e.target.value)}
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="description" className="block text-sm font-semibold text-slate-700 mb-2">
+                  <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
                     Description
                   </label>
                   <textarea
@@ -322,13 +322,13 @@ const Dashboard = () => {
                     value={newProjectDescription}
                     onChange={(e) => setNewProjectDescription(e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-8 py-3 rounded-xl"
+                  className="bg-gradient-to-r from-blue-600 to-blue-600 text-white px-8 py-3 rounded-xl"
                 >
                   Create Project
                 </button>

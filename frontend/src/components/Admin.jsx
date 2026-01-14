@@ -113,7 +113,7 @@ const Admin = () => {
                         <select
                           value={u.role}
                           onChange={(e) => handleRoleChange(u._id, e.target.value)}
-                          className="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                          className="border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
                         >
                           <option value="member">Member</option>
                           <option value="manager">Manager</option>
@@ -143,7 +143,7 @@ const Admin = () => {
                           <select
                             value={project.members?.filter(m => m).length > 0 ? project.members.filter(m => m)[0]._id : ''}
                             onChange={(e) => handleQuickUpdateMembers(project._id, e.target.value ? [e.target.value] : [])}
-                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
                           >
                             <option value="">Select a member</option>
                             {allUsers.map((u) => (
