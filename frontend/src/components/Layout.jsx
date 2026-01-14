@@ -7,7 +7,6 @@ const Layout = ({ children }) => {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
   const [notifications, setNotifications] = useState([]);
-  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -24,18 +23,10 @@ const Layout = ({ children }) => {
     }
   };
 
-  const handleMarkAsRead = async (id) => {
-    try {
-      await markAsRead(id);
-      fetchNotifications();
-    } catch (error) {
-      console.error('Error marking notification as read:', error);
-    }
-  };
-
   const navigation = [
     { name: 'Dashboard', href: '/', icon: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z' },
     { name: 'Timeline', href: '/timeline', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+    { name: 'Notifications', href: '/notifications', icon: 'M15 17h5l-5 5v-5zM15 17H9a6 6 0 01-6-6V9a6 6 0 0110.293-4.293L15 6.414V17z' },
   ];
 
   if (user && user.role === 'admin') {
@@ -82,74 +73,16 @@ const Layout = ({ children }) => {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                 </svg>
-                {item.name}
+                <span className="flex-1">{item.name}</span>
+                {item.name === 'Notifications' && notifications.filter((n) => !n.read).length > 0 && (
+                  <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse ml-2">
+                    {notifications.filter((n) => !n.read).length}
+                  </span>
+                )}
               </Link>
             );
           })}
         </nav>
-
-        {/* Notifications */}
-        <div className="px-4 py-4 border-t border-white/20">
-          <div className="relative">
-            <button
-              onClick={() => setShowNotifications(!showNotifications)}
-              className="w-full flex items-center px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 rounded-xl transition-all duration-300 group"
-            >
-              <svg className="w-5 h-5 mr-3 text-gray-400 group-hover:text-blue-600 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM15 17H9a6 6 0 01-6-6V9a6 6 0 0110.293-4.293L15 6.414V17z" />
-              </svg>
-              Notifications
-              {notifications.filter((n) => !n.read).length > 0 && (
-                <span className="ml-auto bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
-                  {notifications.filter((n) => !n.read).length}
-                </span>
-              )}
-            </button>
-
-            {showNotifications && (
-              <div className="absolute bottom-full left-0 mb-2 w-80 bg-white/95 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl z-50 animate-in slide-in-from-bottom-2 duration-300">
-                <div className="p-4 border-b border-gray-200/50">
-                  <h3 className="text-sm font-semibold text-gray-900 flex items-center">
-                    <svg className="w-4 h-4 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM15 17H9a6 6 0 01-6-6V9a6 6 0 0110.293-4.293L15 6.414V17z" />
-                    </svg>
-                    Notifications
-                  </h3>
-                </div>
-
-                <div className="max-h-96 overflow-y-auto">
-                  {notifications.length === 0 ? (
-                    <div className="p-6 text-center text-gray-500">
-                      <p className="text-sm">You're all caught up!</p>
-                    </div>
-                  ) : (
-                    notifications.slice(0, 5).map((notification) => (
-                      <div
-                        key={notification._id}
-                        className={`p-4 border-b border-gray-100/50 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-blue-50/50 transition-all duration-200 ${
-                          !notification.read ? 'bg-gradient-to-r from-blue-50/50 to-blue-50/50' : ''
-                        }`}
-                      >
-                        <p className="text-sm text-gray-900 mb-2">{notification.message}</p>
-                        <div className="flex items-center justify-between">
-                          <p className="text-xs text-gray-500">{new Date(notification.createdAt).toLocaleString()}</p>
-                          {!notification.read && (
-                            <button
-                              onClick={() => handleMarkAsRead(notification._id)}
-                              className="text-xs text-blue-600 hover:text-blue-700 transition-colors duration-200 font-medium hover:bg-blue-50 px-2 py-1 rounded-lg"
-                            >
-                              Mark as read
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
 
         {/* User Info & Logout */}
         <div className="px-4 py-4 border-t border-white/20">

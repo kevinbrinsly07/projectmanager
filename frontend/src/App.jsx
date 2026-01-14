@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Admin from './components/Admin';
 import Timeline from './components/Timeline';
+import Notifications from './components/Notifications';
 import './App.css';
 
 function App() {
@@ -34,6 +35,11 @@ function App() {
           <Route path="/timeline" element={
             <Layout>
               <Timeline />
+            </Layout>
+          } />
+          <Route path="/notifications" element={
+            <Layout>
+              <Notifications />
             </Layout>
           } />
         </Routes>
