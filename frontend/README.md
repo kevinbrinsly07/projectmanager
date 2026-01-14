@@ -1,16 +1,88 @@
-# React + Vite
+# Project Manager Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the Project Manager, a full-stack project management tool built with React.js and Vite.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The frontend provides a responsive, user-friendly interface for managing projects, tasks, and team collaboration. It communicates with the backend API to handle data operations.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React.js**: Component-based UI library
+- **Vite**: Fast build tool and development server
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Axios**: HTTP client for API requests
+- **React Router**: Client-side routing
+- **@dnd-kit**: Drag-and-drop functionality for task management
+- **React Calendar Timeline**: Timeline visualization for projects
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (version 14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development
+
+Start the development server:
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`.
+
+### Building for Production
+
+Build the application:
+```bash
+npm run build
+```
+
+Preview the production build:
+```bash
+npm run preview
+```
+
+### Linting
+
+Run ESLint to check for code issues:
+```bash
+npm run lint
+```
+
+## Project Structure
+
+- `src/`: Source code
+  - `components/`: Reusable UI components
+  - `api/`: API service functions
+  - `context/`: React context providers (e.g., AuthContext)
+  - `assets/`: Static assets
+- `public/`: Public assets
+- `index.html`: Main HTML file
+
+## Features
+
+- User authentication and authorization
+- Dashboard with project overview
+- Project creation and management
+- Task organization with drag-and-drop
+- Timeline view for project schedules
+- Notifications panel
+- Admin interface for system management
+
+## Contributing
+
+Follow the main project's contributing guidelines. Ensure all changes pass linting and build successfully.
